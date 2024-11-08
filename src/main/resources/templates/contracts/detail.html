@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>契約詳細</title>
+</head>
+<body>
+    <h1>契約詳細</h1>
+    <div>
+        <p><strong>ID:</strong> <span th:text="${contract.id}">1</span></p>
+        <p><strong>顧客名:</strong> <span th:text="${contract.customer.name}">山田太郎</span></p>
+        <p><strong>契約開始日:</strong> <span th:text="${contract.startDate}">2023-01-01</span></p>
+        <p><strong>契約終了日:</strong> <span th:text="${contract.endDate}">2024-01-01</span></p>
+        <p><strong>ステータス:</strong> <span th:text="${contract.status}">有効</span></p>
+        <p><strong>ランク:</strong> <span th:text="${contract.rank}">Bronze</span></p>
+        <p><strong>更新通知:</strong> <span th:text="${contract.renewalAlert ? '有効' : '無効'}">有効</span></p>
+    </div>
+    <a th:href="@{/contracts}">契約一覧に戻る</a>
+</body>
+</html>
