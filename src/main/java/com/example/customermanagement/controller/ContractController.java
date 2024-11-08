@@ -16,7 +16,7 @@ import com.example.customermanagement.repository.CustomerRepository;
 
 /**
  * Contract コントローラー
- * 契約の一覧表示、詳細表示、作成、更新、削除の処理を行います。
+ * 契約の一覧表示、詳細表示、作成、編集、削除の処理を行います。
  */
 @Controller
 public class ContractController {
@@ -69,7 +69,25 @@ public class ContractController {
     }
 
     /**
-     * 契約を保存する処理
+     * 契約編集フォームを表示する処理
+     * @param id 編集対象の契約ID
+     * @param model モデルオブジェクト
+     * @return 契約編集ページのテンプレート
+     */
+    @GetMapping("/contracts/edit")
+    public String showEditForm(@RequestParam("id") Long id, Model model) {
+        Contract contract = contractRepository.findById(id).orElse(null); // 契約をIDで検索
+        if (contract == null) {
+            return "redirect:/contracts?error=notfound"; // 見つからない場合は一覧にリダイレクト
+        }
+        List<Customer> customers = customerRepository.findAll(); // 全顧客を取得
+        model.addAttribute("customers", customers); // モデルに顧客リストを追加
+        model.addAttribute("contract", contract); // 編集対象の契約をモデルに追加
+        return "contracts/form"; // 契約編集ページ（contracts/form.html）を表示
+    }
+
+    /**
+     * 契約を保存する処理（新規作成・編集共通）
      * @param contract 保存する契約オブジェクト
      * @return 契約一覧ページへのリダイレクト
      */

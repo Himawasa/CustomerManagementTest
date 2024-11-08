@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>契約編集</title>
+</head>
+<body>
+    <h1>契約編集</h1>
+    <form th:action="@{/contracts/save}" th:object="${contract}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <label for="customer">顧客:</label>
+        <select th:field="*{customer.id}" required>
+            <option th:each="customer : ${customers}"
+                    th:value="${customer.id}"
+                    th:text="${customer.name}">
+            </option>
+        </select><br/>
+        <label for="startDate">契約開始日:</label>
+        <input type="date" th:field="*{startDate}" required/><br/>
+        <label for="endDate">契約終了日:</label>
+        <input type="date" th:field="*{endDate}" required/><br/>
+        <label for="status">ステータス:</label>
+        <input type="text" th:field="*{status}" required/><br/>
+        <label for="rank">ランク:</label>
+        <input type="text" th:field="*{rank}" required/><br/>
+        <label for="renewalAlert">更新通知:</label>
+        <input type="checkbox" th:field="*{renewalAlert}"/><br/>
+        <button type="submit">保存</button>
+    </form>
+    <a th:href="@{/contracts}">戻る</a>
+</body>
+</html>
