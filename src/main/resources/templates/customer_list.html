@@ -5,7 +5,7 @@
     <title>顧客一覧</title>
     <style>
         body {
-            background-color: #FFFACD; /* 薄黄色の背景 */
+            background-color: #FFFACD;
             font-family: Arial, sans-serif;
         }
         .container {
@@ -24,9 +24,9 @@
             background-color: #FFFFFF;
         }
         table th, table td {
-            border: 1px solid #DDDDDD; /* 罫線 */
+            border: 1px solid #DDDDDD;
             padding: 10px;
-            text-align: center; /* センタリング */
+            text-align: center;
         }
         table th {
             background-color: #F3F3F3;
@@ -35,26 +35,19 @@
         table tr:nth-child(even) {
             background-color: #FAFAFA;
         }
-        .btn {
-            display: inline-block;
-            padding: 8px 16px;
-            margin-top: 20px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
+        .search-form {
             text-align: center;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-        .btn:hover {
-            background-color: #45a049;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>顧客一覧</h1>
-        <a href="/contracts" class="btn">契約一覧へ</a>
+        <form class="search-form" th:action="@{/customers}" method="get">
+            <input type="text" name="keyword" placeholder="名前またはメールアドレスで検索" />
+            <button type="submit">検索</button>
+        </form>
         <table>
             <thead>
                 <tr>
