@@ -2,45 +2,100 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>契約作成</title>
+    <style>
+        body {
+            background-color: #FFFACD; /* 薄黄色の背景 */
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 60%;
+            margin: auto;
+            padding-top: 20px;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+        }
+        input, select {
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #DDDDDD;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #333;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>契約作成</h1>
-    <form action="/contracts/save" method="post">
-        <label for="customer">顧客</label>
-        <select name="customer.id" id="customer" required>
-            <option th:each="customer : ${customers}" 
-                    th:value="${customer.id}" 
-                    th:text="${customer.name}"></option>
-        </select>
-        <br/>
+    <div class="container">
+        <h1>契約作成</h1>
+        <form th:action="@{/contracts/save}" th:object="${contract}" method="post">
+            <input type="hidden" th:field="*{id}" />
+            
+            <label for="customer">顧客</label>
+            <select th:field="*{customer.id}" id="customer" required>
+                <option th:each="customer : ${customers}" 
+                        th:value="${customer.id}" 
+                        th:text="${customer.name}"></option>
+            </select>
 
-        <label for="startDate">契約開始日</label>
-        <input type="date" id="startDate" name="startDate" required>
-        <br/>
+            <label for="startDate">契約開始日</label>
+            <input type="date" th:field="*{startDate}" id="startDate" required>
 
-        <label for="endDate">契約終了日</label>
-        <input type="date" id="endDate" name="endDate" required>
-        <br/>
+            <label for="endDate">契約終了日</label>
+            <input type="date" th:field="*{endDate}" id="endDate" required>
 
-        <label for="status">ステータス</label>
-        <input type="text" id="status" name="status" required>
-        <br/>
+            <label for="status">ステータス</label>
+            <input type="text" th:field="*{status}" id="status" required>
 
-        <label for="rank">ランク</label>
-        <select name="rank" id="rank" required>
-            <option value="Bronze">Bronze</option>
-            <option value="Silver">Silver</option>
-            <option value="Gold">Gold</option>
-        </select>
-        <br/>
+            <label for="rank">ランク</label>
+            <select th:field="*{rank}" id="rank" required>
+                <option value="Bronze">Bronze</option>
+                <option value="Silver">Silver</option>
+                <option value="Gold">Gold</option>
+            </select>
 
-        <label for="renewalAlert">更新通知</label>
-        <input type="checkbox" id="renewalAlert" name="renewalAlert">
-        <br/>
+            <label for="renewalAlert">更新通知</label>
+            <input type="checkbox" th:field="*{renewalAlert}" id="renewalAlert">
 
-        <button type="submit">保存</button>
-    </form>
-    <a href="/contracts">契約一覧に戻る</a>
+            <button type="submit">保存</button>
+        </form>
+        <a th:href="@{/contracts}">契約一覧に戻る</a>
+    </div>
 </body>
 </html>
