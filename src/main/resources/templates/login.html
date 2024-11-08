@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ログイン</title>
+</head>
+<body>
+    <h2>ログイン</h2>
+    <form th:action="@{/login}" method="post">
+        <label for="username">ID:</label>
+        <input type="text" id="username" name="username" required>
+        <button type="submit">ログイン</button>
+    </form>
+    <p th:if="${error}" th:text="${error}"></p>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!-- templates/contracts/form.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>契約作成</title>
+</head>
+<body>
+    <h1>契約作成</h1>
+    <form action="/contracts/save" method="post">
+        <label for="customer">顧客</label>
+        <select name="customer.id" id="customer" required>
+            <option th:each="customer : ${customers}" 
+                    th:value="${customer.id}" 
+                    th:text="${customer.name}"></option>
+        </select>
+        <br/>
+
+        <label for="startDate">契約開始日</label>
+        <input type="date" id="startDate" name="startDate" required>
+        <br/>
+
+        <label for="endDate">契約終了日</label>
+        <input type="date" id="endDate" name="endDate" required>
+        <br/>
+
+        <label for="status">ステータス</label>
+        <input type="text" id="status" name="status" required>
+        <br/>
+
+        <label for="rank">ランク</label>
+        <select name="rank" id="rank" required>
+            <option value="Bronze">Bronze</option>
+            <option value="Silver">Silver</option>
+            <option value="Gold">Gold</option>
+        </select>
+        <br/>
+
+        <label for="renewalAlert">更新通知</label>
+        <input type="checkbox" id="renewalAlert" name="renewalAlert">
+        <br/>
+
+        <button type="submit">保存</button>
+    </form>
+    <a href="/contracts">契約一覧に戻る</a>
+</body>
+</html>

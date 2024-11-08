@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>契約一覧</title>
+    <style>
+        body {
+            background-color: #FFFACD; /* 薄黄色の背景 */
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding-top: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #FFFFFF;
+        }
+        table th, table td {
+            border: 1px solid #DDDDDD; /* 罫線 */
+            padding: 10px;
+            text-align: center; /* センタリング */
+        }
+        table th {
+            background-color: #F3F3F3;
+            font-weight: bold;
+        }
+        table tr:nth-child(even) {
+            background-color: #FAFAFA;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>契約一覧</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>顧客名</th>
+                    <th>契約開始日</th>
+                    <th>契約終了日</th>
+                    <th>ステータス</th>
+                    <th>ランク</th>
+                    <th>更新通知</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="contract : ${contracts}">
+                    <td th:text="${contract.id}">1</td>
+                    <td th:text="${contract.customer.name}">顧客名</td>
+                    <td th:text="${contract.startDate}">2023-01-01</td>
+                    <td th:text="${contract.endDate}">2024-01-01</td>
+                    <td th:text="${contract.status}">有効</td>
+                    <td th:text="${contract.rank}">Bronze</td>
+                    <td th:text="${contract.renewalAlert ? '有効' : '無効'}">有効</td>
+                    <td><a th:href="@{'/contracts/delete?id=' + ${contract.id}}" onclick="return confirm('削除してもよろしいですか？');">削除</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <a th:href="@{/contracts/new}" class="btn">新規契約作成</a>
+    </div>
+</body>
+
+</html>
