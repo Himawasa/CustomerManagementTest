@@ -49,6 +49,12 @@
         .btn:hover {
             background-color: #45a049;
         }
+        .btn-danger {
+            background-color: #f44336;
+        }
+        .btn-danger:hover {
+            background-color: #e53935;
+        }
         .search-form {
             text-align: center;
             margin-bottom: 20px;
@@ -84,7 +90,6 @@
             <input type="text" name="keyword" placeholder="名前またはメールアドレスで検索" />
             <button type="submit">検索</button>
         </form>
-        <a href="/contracts" class="btn">契約一覧へ</a> <!-- 契約一覧へのボタンを追加 -->
         <table>
             <thead>
                 <tr>
@@ -94,6 +99,7 @@
                     <th>メールアドレス</th>
                     <th>電話番号</th>
                     <th>住所</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -104,6 +110,10 @@
                     <td th:text="${customer.email}">taro@example.com</td>
                     <td th:text="${customer.phone}">090-1234-5678</td>
                     <td th:text="${customer.address}">東京都新宿区</td>
+                    <td>
+                        <a th:href="@{'/customers/edit?id=' + ${customer.id}}" class="btn">編集</a>
+                        <a th:href="@{'/customers/delete?id=' + ${customer.id}}" class="btn btn-danger" onclick="return confirm('削除してもよろしいですか？');">削除</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
