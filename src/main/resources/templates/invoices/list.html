@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>請求一覧</title>
+    <style>
+        body {
+            background-color: #FFFACD; /* 薄黄色の背景 */
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding-top: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #FFFFFF;
+        }
+        table th, table td {
+            border: 1px solid #DDDDDD; /* 罫線 */
+            padding: 10px;
+            text-align: center; /* センタリング */
+        }
+        table th {
+            background-color: #F3F3F3;
+            font-weight: bold;
+        }
+        table tr:nth-child(even) {
+            background-color: #FAFAFA;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>請求一覧</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>契約ID</th>
+                    <th>請求日</th>
+                    <th>請求金額</th>
+                    <th>支払期限</th>
+                    <th>支払状況</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="invoice : ${invoices}">
+                    <td th:text="${invoice.id}">1</td>
+                    <td th:text="${invoice.contract.id}">契約ID</td>
+                    <td th:text="${invoice.invoiceDate}">2024-11-08</td>
+                    <td th:text="${invoice.amount}">10000</td>
+                    <td th:text="${invoice.dueDate}">2024-12-08</td>
+                    <td th:text="${invoice.status}">未払い</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

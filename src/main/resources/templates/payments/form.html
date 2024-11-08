@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>入金登録</title>
+</head>
+<body>
+    <h1>入金登録</h1>
+    <form th:action="@{/payments/save}" th:object="${payment}" method="post">
+        <label for="invoice">請求ID:</label>
+        <select th:field="*{invoice.id}" required>
+            <option th:each="invoice : ${invoices}" th:value="${invoice.id}" th:text="${invoice.id}"></option>
+        </select>
+        <br/>
+        <label for="paymentDate">入金日:</label>
+        <input type="date" th:field="*{paymentDate}" required/>
+        <br/>
+        <label for="amount">入金額:</label>
+        <input type="number" th:field="*{amount}" required/>
+        <br/>
+        <button type="submit">保存</button>
+    </form>
+    <a href="/payments">入金一覧に戻る</a>
+</body>
+</html>

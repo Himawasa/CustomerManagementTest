@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>請求作成・編集</title>
+    <style>
+        body {
+            background-color: #FFFACD; /* 薄黄色の背景 */
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            padding-top: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+        }
+        input, select, button {
+            margin-bottom: 15px;
+            padding: 8px;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>請求作成・編集</h1>
+        <form th:action="@{/invoices/save}" th:object="${invoice}" method="post">
+            <label for="contract">契約</label>
+            <select th:field="*{contract.id}" required>
+                <option th:each="contract : ${contracts}" th:value="${contract.id}" th:text="${contract.id}"></option>
+            </select>
+
+            <label for="invoiceDate">請求日</label>
+            <input type="date" th:field="*{invoiceDate}" required />
+
+            <label for="amount">金額</label>
+            <input type="number" th:field="*{amount}" required />
+
+            <label for="dueDate">支払期限</label>
+            <input type="date" th:field="*{dueDate}" required />
+
+            <label for="status">支払状況</label>
+            <input type="text" th:field="*{status}" required />
+
+            <button type="submit" class="btn">保存</button>
+        </form>
+        <a href="/invoices" class="btn">請求一覧に戻る</a>
+    </div>
+</body>
+</html>

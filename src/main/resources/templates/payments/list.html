@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>入金一覧</title>
+    <style>
+        body {
+            background-color: #FFFACD; /* 薄黄色の背景 */
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding-top: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #FFFFFF;
+        }
+        table th, table td {
+            border: 1px solid #DDDDDD; /* 罫線 */
+            padding: 10px;
+            text-align: center; /* センタリング */
+        }
+        table th {
+            background-color: #F3F3F3;
+            font-weight: bold;
+        }
+        table tr:nth-child(even) {
+            background-color: #FAFAFA;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>入金一覧</h1>
+        <a href="/payments/new" class="btn">新規入金登録</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>請求ID</th>
+                    <th>入金日</th>
+                    <th>入金額</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="payment : ${payments}">
+                    <td th:text="${payment.id}">1</td>
+                    <td th:text="${payment.invoice.id}">123</td>
+                    <td th:text="${payment.paymentDate}">2024-11-08</td>
+                    <td th:text="${payment.amount}">10000</td>
+                    <td>
+                        <a th:href="@{'/payments/delete?id=' + ${payment.id}}" class="btn" style="background-color: #f44336;">削除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

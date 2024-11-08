@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;  // 追加
 
 import lombok.Data;
 
@@ -19,6 +20,7 @@ import lombok.Data;
  */
 
 @Entity  // エンティティクラスであることを示すアノテーション
+@Table(name = "payments")  // テーブル名を明示
 @Data   // Lombokを利用してゲッター・セッターを自動生成
 public class Payment {
 
