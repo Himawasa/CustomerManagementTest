@@ -35,9 +35,45 @@
         table tr:nth-child(even) {
             background-color: #FAFAFA;
         }
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        nav {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #45a049;
+        }
     </style>
 </head>
 <body>
+    <!-- 共通のヘッダー -->
+    <nav>
+        <a href="/customers">顧客一覧</a>
+        <a href="/contracts">契約一覧</a>
+        <a href="/invoices">請求一覧</a>
+        <a href="/payments">入金一覧</a>
+    </nav>
+    <hr>
+
     <div class="container">
         <h1>請求一覧</h1>
         <table>
